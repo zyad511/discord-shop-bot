@@ -20,7 +20,7 @@ const ADMIN_PASS = process.env.ADMIN_PASS;
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 client.login(TOKEN);
 
-// ==== DB ====
+// ==== DATABASE ====
 const dbFile = path.join(__dirname,'data','db.sqlite');
 let db;
 
@@ -45,7 +45,7 @@ let db;
   )`);
 })();
 
-// ==== تشفير الشوبات ====
+// ==== ENCRYPT / DECRYPT ====
 const shopEncryptMap = {
   "سعر": "س3ر","تبادل": "تbادل","متوفر": "مت9فر","مطلوب": "مطل9ب",
   "عرض": "3رض","عروضكم": "3ر9ضكم","عرضك": "3رضك","رصيد": "ر9يد",
@@ -76,7 +76,7 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended:true }));
 
-// ==== SESSION مع SQLiteStore (حل التحذير) ====
+// ==== SESSION مع SQLiteStore ====
 app.use(session({
   store: new SQLiteStore({ db: 'sessions.sqlite', dir:'./data' }),
   secret: 'supersecret',
@@ -143,6 +143,35 @@ app.post('/api/store', requireBasicLogin, requireDiscord, async(req,res)=>{
       return res.json({ok:true});
     }
   }catch(e){ res.json({ok:false,msg:e.message}); }
+});
+
+// ==== DISCORD BOT COMMANDS (PRIVATE ONLY) ====
+client.on('interactionCreate', async interaction => {
+  if(!interaction.isChatInputCommand()) return;
+  const cmd = interaction.commandName;
+
+  // الأوامر التي تعمل بالخاص فقط
+  if(cmd==='تشفير' || cmd==='فك_تشفير'){
+    if(interaction.guild) return interaction.reply({ content:'❌ هذه الأوامر تعمل فقط بالخاص', ephemeral:true });
+  }
+
+  if(cmd==='تشفير'){
+    const text = interaction.options.getString('النص');
+    await interaction.reply({ content: `🔒 النص المشفر:\n${encryptText(text)}`, ephemeral:true });
+  } else if(cmd==='فك_تشفير'){
+    const text = interaction.options.getString('النص');
+    await interaction.reply({ content: `🔓 النص المفكوك:\n${decryptText(text)}`, ephemeral:true });
+  } else if(cmd==='help'){
+    const embed = new EmbedBuilder()
+      .setTitle('📜 قائمة أوامر البوت')
+      .setColor('Blue')
+      .setDescription(`
+/تشفير <النص> → تشفير نص (بالخاص فقط)
+/فك_تشفير <النص> → فك النص المشفر (بالخاص فقط)
+/help → عرض جميع الأوامر
+      `);
+    await interaction.reply({ embeds:[embed], ephemeral:true });
+  }
 });
 
 // ==== STATIC ====
