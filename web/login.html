@@ -2,11 +2,15 @@
 <html lang="ar">
 <head>
 <meta charset="UTF-8">
-<title>تسجيل دخول الأدمن</title>
+<title>🔐 دخول الأدمن</title>
 <link rel="stylesheet" href="style.css">
 </head>
-<body>
-<h2>تسجيل دخول الأدمن</h2>
-<a href="/auth/login"><button>تسجيل الدخول بـ Discord</button></a>
+<body class="center">
+  <form action="/login" method="POST" class="card">
+    <h2>🔐 دخول الأدمن</h2>
+    <input name="username" placeholder="Username" required>
+    <input name="password" type="password" placeholder="Password" required>
+    <button>دخول</button>
+  </form>
 </body>
 </html>
