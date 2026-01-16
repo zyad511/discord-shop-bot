@@ -1,6 +1,7 @@
 const { Client, GatewayIntentBits, SlashCommandBuilder, REST, Routes, EmbedBuilder } = require('discord.js');
 const express = require('express');
 const session = require('express-session');
+const SQLiteStore = require('connect-sqlite3')(session);
 const path = require('path');
 const fetch = require('node-fetch');
 const sqlite = require('sqlite');
@@ -74,7 +75,14 @@ const rest = new REST({ version:'10' }).setToken(TOKEN);
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended:true }));
-app.use(session({ secret:'supersecret', resave:false, saveUninitialized:true }));
+
+// ==== SESSION مع SQLiteStore (حل التحذير) ====
+app.use(session({
+  store: new SQLiteStore({ db: 'sessions.sqlite', dir:'./data' }),
+  secret: 'supersecret',
+  resave: false,
+  saveUninitialized: false
+}));
 
 function requireBasicLogin(req,res,next){ if(!req.session.basicAuth) return res.redirect('/login.html'); next(); }
 function requireDiscord(req,res,next){ if(!req.session.user) return res.redirect('/auth/login'); next(); }
