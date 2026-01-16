@@ -2,28 +2,62 @@
 <html lang="ar">
 <head>
 <meta charset="UTF-8">
-<title>لوحة التحكم</title>
-<link rel="stylesheet" href="style.css">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>لوحة تحكم الأدمن - Discord Shop Bot</title>
+<!-- Tailwind CSS + DaisyUI -->
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.3.3/dist/tailwind.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/daisyui@2.51.5/dist/full.css" rel="stylesheet">
 </head>
-<body>
-<h2>لوحة التحكم للأدمن</h2>
+<body class="bg-gradient-to-r from-blue-900 to-blue-600 min-h-screen text-white">
 
-<h3>إنشاء متجر جديد</h3>
-<form id="addStoreForm">
-<input type="text" placeholder="اسم المتجر" name="name" required>
-<select name="type">
-<option value="PLATINUM">PLATINUM</option>
-<option value="GOLD">GOLD</option>
-<option value="VIP">VIP</option>
-</select>
-<button type="submit">إنشاء</button>
-</form>
+<div class="container mx-auto p-6">
 
-<h3>سجل النشاطات (Log)</h3>
-<table border="1" id="logTable">
-<tr><th>الوقت</th><th>الإجراء</th><th>المتجر</th><th>الأدمن</th><th>ID</th><th>التفاصيل</th></tr>
-</table>
+  <h1 class="text-4xl font-bold mb-6 text-center">🎮 لوحة التحكم للأدمن</h1>
 
-<script src="script.js"></script>
+  <!-- إنشاء متجر جديد -->
+  <div class="card bg-gray-800 p-6 mb-8 shadow-lg rounded-xl">
+    <h2 class="text-2xl font-semibold mb-4">إنشاء متجر جديد</h2>
+    <form id="addStoreForm" class="flex flex-col sm:flex-row gap-4 items-center">
+      <input type="text" placeholder="اسم المتجر" name="name" required
+        class="input input-bordered w-full max-w-xs">
+      <select name="type" class="select select-bordered w-full max-w-xs">
+        <option value="PLATINUM">PLATINUM</option>
+        <option value="GOLD">GOLD</option>
+        <option value="VIP">VIP</option>
+      </select>
+      <button type="submit" class="btn btn-success">إنشاء متجر</button>
+    </form>
+  </div>
+
+  <!-- قائمة المتاجر -->
+  <div id="storesContainer" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+    <!-- بطاقات المتاجر ستظهر هنا -->
+  </div>
+
+  <!-- سجل النشاطات -->
+  <div class="card bg-gray-800 p-6 shadow-lg rounded-xl">
+    <h2 class="text-2xl font-semibold mb-4">سجل النشاطات (Logs)</h2>
+    <div class="overflow-x-auto">
+      <table class="table table-zebra w-full" id="logTable">
+        <thead>
+          <tr>
+            <th>الوقت</th>
+            <th>الإجراء</th>
+            <th>المتجر</th>
+            <th>الأدمن</th>
+            <th>ID</th>
+            <th>التفاصيل</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- الـLogs ستظهر هنا -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
+
+<script src="dashboard.js"></script>
 </body>
 </html>
