@@ -1,7 +1,7 @@
 {
   "name": "discord-shop-bot",
   "version": "1.0.0",
-  "description": "بوت Discord متكامل مع لوحة تحكم فخمة لإدارة المتاجر والمنشنات",
+  "description": "بوت Discord متكامل مع لوحة تحكم",
   "main": "index.js",
   "type": "commonjs",
   "scripts": {
