@@ -1,6 +1,7 @@
 {
   "name": "discord-shop-bot",
   "version": "1.0.0",
+  "description": "بوت Discord متكامل مع لوحة تحكم فخمة لإدارة المتاجر والمنشنات",
   "main": "index.js",
   "type": "commonjs",
   "scripts": {
@@ -10,11 +11,7 @@
     "discord.js": "^14.14.1",
     "express": "^4.19.2",
     "express-session": "^1.17.3",
-    "node-fetch": "^2.6.12",
-    "sqlite3": "^5.1.6",
-    "connect-sqlite3": "^0.9.0"
-  },
-  "engines": {
-    "node": "20.x"
+    "better-sqlite3": "^8.3.0",
+    "node-fetch": "^3.3.2"
   }
 }
