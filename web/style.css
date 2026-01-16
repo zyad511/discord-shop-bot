@@ -1,5 +1,6 @@
-body { font-family: Tahoma; background:#0f172a; color:white; text-align:center; margin-top:50px; }
-input, select, button { padding:10px; margin:5px; }
-table { margin:auto; border-collapse: collapse; width:90%; }
-th, td { padding:10px; border:1px solid #ccc; color:white; }
-button { background:#22c55e; border:none; cursor:pointer; }
+body { font-family: 'Tahoma', sans-serif; }
+h1,h2,h3 { color: #fff; }
+.card { transition: transform 0.2s ease; }
+.card:hover { transform: translateY(-5px); }
+.btn { transition: all 0.2s ease; }
+.btn:hover { opacity: 0.9; }
