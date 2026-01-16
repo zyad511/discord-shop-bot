@@ -1,0 +1,15 @@
+{
+  "name": "discord-shop-bot",
+  "version": "1.0.0",
+  "main": "index.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "discord.js": "^14.14.1",
+    "express": "^4.19.2",
+    "express-session": "^1.17.3",
+    "node-fetch": "^3.3.2"
+  }
+}
